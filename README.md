@@ -1,5 +1,5 @@
 # Easy multi Django apps on AWS w/ Nginx
-## Designed for usage with `https://github.com/GuiFV/django-quickstart`
+#### Designed for usage with https://github.com/GuiFV/django-quickstart
 ### Requirements
 
 - linux instance deployed on AWS
