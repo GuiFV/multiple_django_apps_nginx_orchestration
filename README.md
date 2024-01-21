@@ -16,6 +16,7 @@
 #### Change the following:
 - on Dockerfile, change website_1 and website_2 for the names of your apps (this helps with identification)
 - under conf.d, change the name of the files to the same as the item above
+- under docker-compose.yml change the volumes names directories so the paths are correct, like the item above
 - inside each .conf, change the domain to the respective app domain
 - notice that each app will be exposed in a different proxy_pass (in the default .conf files, 8000 and 8001)
 - don't forget to change for the same port on the docker-compose.yml file on the respective application (command:gunicorn and expose:)

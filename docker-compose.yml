@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    build: .
+    network_mode: host
+    command: [nginx, '-g', 'daemon off;']
+
+    expose:
+      - 80
+      - 443
+
+    volumes:
+      - /home/ec2-user/website_1/staticfiles:/static/
+      - /home/ec2-user/website_2/staticfiles:/static/
