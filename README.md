@@ -8,7 +8,7 @@
 - SSL for domains
   - (optional) route domains DNS through Cloudflare for free SSL
 
-### Step 1
+### Step 1 - setup
 1. access your linux instance
 2. copy "Dockerfile" and "conf.d" to main folder (the one you land on when access via ssh, usually '../home/ec2-user')
 3. git pull your django apps (on the same folder) respecting the docker-compose.yml notes on the link above
@@ -17,14 +17,22 @@
 - on Dockerfile, change website_1 and website_2 for the names of your apps (this helps with identification)
 - under conf.d, change the name of the files to the same as the item above
 - under docker-compose.yml change the volumes names directories so the paths are correct, like the item above
+- under each .conf file, change the static alias prefix for the names of your apps (they must match the static ones in the docker-compose)
 - inside each .conf, change the domain to the respective app domain
-- notice that each app will be exposed in a different proxy_pass (in the default .conf files, 8000 and 8001)
+- notice that each app will be exposed in a different proxy_pass (in this example, website_1 is on port 8000 and website_2 is on port 8001)
 - don't forget to change for the same port on the docker-compose.yml file on the respective application (command:gunicorn and expose:)
 
-### Step 2
-- go to each application folder and spin them up with docker-compose 
-- go back to main folder and run `docker-compose up -d --build`
-- navigate to each app ur - they should be served correctly (don't forget to 'collectstatic' each one)
+### Step 2 - spin up each application and then the nginx
+- go to each application folder
+  - copy and do the necessary changes on the .env file 
+  - spin it up with `docker-compose up -d --build`
+  - migrate your database with `docker-compose run web python amanage.py migrate`
+  - create a superuser with `docker-compose run web python amanage.py createsuperuser`
+  - collect your static files `docker-compose run web python amanage.py collectstatic`
+- lastly, go back to main folder (the one with the nginx docker files) and run `docker-compose up -d --build`
+- open your browser and visit each app - they should be served correctly 
 
 ### Serving more apps on the same server
-By replicating the .conf calls in the Dockerfile and creating their respective .conf files, you can serve as many applications as your instance can handle
+- replicate .conf paths in the Dockerfile, static alias in the docker-compose and create the respective .conf files for each app
+- don't forget to expose each app in a different port
+- you can serve as many applications as your instance can handle

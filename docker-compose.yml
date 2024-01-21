@@ -12,5 +12,5 @@ services:
       - 443
 
     volumes:
-      - /home/ec2-user/website_1/staticfiles:/static/
-      - /home/ec2-user/website_2/staticfiles:/static/
+      - /home/ec2-user/website_1/staticfiles:/website_1-static/
+      - /home/ec2-user/website_2/staticfiles:/website_2-static/
