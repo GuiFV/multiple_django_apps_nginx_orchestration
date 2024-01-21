@@ -25,5 +25,5 @@
 - go back to main folder and run `docker-compose up -d --build`
 - navigate to each app ur - they should be served correctly (don't forget to 'collectstatic' each one)
 
-### Serving more websites
+### Serving more apps on the same server
 By replicating the .conf calls in the Dockerfile and creating their respective .conf files, you can serve as many applications as your instance can handle
